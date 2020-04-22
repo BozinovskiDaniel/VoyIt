@@ -1,0 +1,290 @@
+.weatherCard {
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+}
+
+.fc-event, .fc-event-dot {
+    background-color: orange;
+}
+
+.external-eve {
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    height: 76vh;
+    top: 200px;
+    right: 5%;
+    background-color: rgb(252, 246, 181);
+    opacity: 85%;
+    border-radius: 15px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding: 20px;
+}
+
+.fc-content {
+    background-color: rgb(253, 192, 80);
+    border: none;
+    font-size: 15px;
+}
+
+.itinerary {
+
+    .main-container {
+        margin: none;
+        height: 100vh;
+        width: 100%;
+        overflow: auto;
+    }
+    
+    .itinerary-container {
+        border: transparent;
+        height:100vh;
+        width: 100%;
+        position: absolute;
+
+        .itinerary-nav {
+            width: 100%;
+            height: 90px;
+
+            .text-center {
+                font-size: 2em;
+                font-weight: bold;
+                float: left;
+                padding: 20px;
+                margin-left: 137px;
+                color: rgb(253, 192, 80);
+                letter-spacing: 1px;
+            }
+        }
+    }
+    
+    
+    .sidepanel  {
+        width: 300px;
+        position: fixed;
+        z-index: 1;
+        height: 79vh;
+        top: 150px;
+        right: 50px;
+        background-color: rgb(252, 246, 181);
+        opacity: 85%;
+        border-radius: 20px;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+
+        a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+          }
+          
+          a:hover {
+            color: #f1f1f1;
+            cursor: pointer;
+          }
+
+          .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+          }
+      }
+      
+      
+    .plusbtn {
+        font-size: 25px;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: all .2s ease-in-out;
+        display: inline-block;
+
+        &:hover {
+            opacity: 1;
+            color: rgb(224, 170, 68);
+            transform: scale(1.2);
+        }
+    }
+
+    .downloadbtn {
+        display: inline-block;
+        font-size: 28px;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: all .2s ease-in-out;
+        top: 5px;
+
+        &:hover {
+            opacity: 1;
+            color: orange;
+            transform: scale(1.2);
+        }
+    }
+    
+    .openbtn:hover {
+        color: rgb(255, 136, 0);
+        transition: 0.5s;
+    }
+    
+    .openbtn:active {
+        color: rgb(255, 94, 0);
+    }
+    
+    .openbtn:focus {outline:0 !important;}
+    
+    
+    .itinerary-panel {
+        width: 100%;
+        height: 650px;
+        display: inline-block;
+    }
+    
+    .itinerary-panel .itinerary-slide-fixed {
+        margin: 0 20px;
+        width: 150px;
+        height: 650px;
+        float: left;
+        flex-shrink: 0;
+        overflow-x: visible;
+    }
+    
+    .itinerary-slider::-webkit-scrollbar { width: 0 !important }
+    
+    .itinerary-panel .itinerary-slider {
+        width: 1200px;
+        height: 650px;
+        display: flex;
+        overflow: auto;
+    }
+    
+    .itinerary-slider .itinerary-slide {
+        margin: 0 5px;
+        border-radius: 5px;
+        background-color: rgb(238, 235, 235);
+        width: 250px;
+        height: 650px;
+        flex-shrink: 0;
+    }
+    
+    .itinerary-slide .itinerary-template {
+        margin-bottom: 10px;
+        width: 250px;
+        height: 50px;
+        border-radius: 5px;
+        background-color: #ccc;
+    }
+    
+    .itinerary-slide .itinerary-template .itinerary-template-text {
+        padding: 10px;
+        text-align: center;
+        color: white;
+    }
+    
+    .itinerary-slide .drag-drop-container {
+        height: 580px;
+        overflow: auto;
+    }
+    
+    .itinerary-slider .itinerary-slide-blank {
+        margin: 0 5px;
+        width: 310px;
+        height: 650px;
+        flex-shrink: 0;
+    }
+    
+    .itinerary-slide-fixed .itinerary-template {
+        width: 140px;
+        height: 185px;
+        margin-bottom: 10px;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        background-color: #ccc; /*background-color: rgba(255, 142, 67, 0.493);*/
+        color: white;
+        text-align: center;
+    }
+    
+    .itinerary-slide-fixed .itinerary-template .itinerary-template-text {
+        margin: 20px;
+    }
+    
+    .itinerary-slide-fixed .itinerary-template-blank {
+        width: 140px;
+        height: 50px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #ccc;
+        color: white;
+        text-align: center;
+    }
+    
+    .itinerary-slide-fixed::-webkit-scrollbar { width: 0 !important }
+    
+    
+    
+    
+    
+    /* drag and drop */
+    
+    [draggable="true"] {
+        /*
+         To prevent user selecting inside the drag source
+        */
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+    
+    
+    .target-container {
+        margin: 10px;
+        width: 260px;
+        height: 80px;
+        border-radius: 5px;
+        background: rgb(226, 225, 225);
+
+    }
+
+    h6 {
+        font-size: 18px;
+        text-align: center;
+        padding: 10px;
+        font-weight: 600;
+    }
+    
+    /* drop target state 
+    [data-draggable="target"][aria-dropeffect="move"]
+    {
+        border-color:rgb(255, 0, 0);
+        background:#fff;
+    }
+    */
+    
+    /* drop target focus and dragover state */
+    [data-draggable="target"][aria-dropeffect="move"]:focus,
+    [data-draggable="target"][aria-dropeffect="move"].dragover
+    {
+        outline:none;
+        box-shadow:0 0 0 1px #fff, 0 0 0 3px rgb(255, 153, 0);
+    }
+    
+    /* items focus state */
+    [data-draggable="item"]:focus
+    {
+        outline:none;
+        box-shadow:0 0 0 2px rgb(255, 136, 0), inset 0 0 0 1px #ddd;
+    }
+    
+    /* items grabbed state */
+    [data-draggable="item"][aria-grabbed="true"]
+    {
+        background: rgb(179, 178, 178);
+        color: black;
+    }
+}

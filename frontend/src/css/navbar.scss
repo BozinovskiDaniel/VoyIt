@@ -1,0 +1,68 @@
+.step1, .selection, .itinerary {    
+
+    .currency {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+    
+    .selectpicker {
+        background-color: transparent;
+        border: none;
+        border-radius: 14px;
+    }
+
+
+    .flag {
+        padding-right: 3px;
+    }
+    
+
+    .banner {
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-left: 3%;
+        }
+
+        .row {
+            background-color: orange;
+        }
+
+        .nav {
+            margin-right: 3%;
+        }
+
+    }
+
+
+    .nav-link {
+        border-radius: 7px;
+        padding: 10px;
+        margin-right: 5px; 
+        background: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        transition-duration: 0.4s;
+        color: white;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+    }
+    
+    .nav-link::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: white;
+        transition: width .3s;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+}

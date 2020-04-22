@@ -1,0 +1,58 @@
+.step1, .selection, .itinerary {
+
+    .hotels-back-btn {
+        float: right;
+        padding-right: 25px;
+    }
+
+    .sub-banner {
+        height: 50px;
+        width: 100%;
+        padding: 0 10px 0;
+        margin: none;
+        background-color: rgb(253, 192, 80);
+        
+        .sub-row{
+            height: 45px;
+            padding: none;
+            margin: none;
+
+            .sub-navbar {
+                height: 45px;
+                padding: 3px 40px 3px;
+
+                .sub-nav{
+                    list-style-type: none;
+                    height: 39px;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    padding-left: 25px;
+                }
+
+                .nav-item {
+                    float: left;
+                    height: 39px;
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+
+
+    .sub-nav-button {
+        background-color: rgb(253, 192, 80);	
+        border: 1.5px solid white;
+        border-radius: 20px;
+        color: white;
+        padding: 5px 15px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        height: 35px;
+    }
+}

@@ -1,0 +1,58 @@
+.step1 {
+
+    .main-container {
+        height: 240vh;
+        margin: 0;
+        padding: 0;
+        
+        .content {
+            height: 220vh;
+            padding: 30px 80px 30px;
+
+            .text-center {
+                font-size: 2em;
+                font-weight: bold;
+                float: left;
+                color: rgb(253, 192, 80);
+            }
+
+            .grid-container {
+                margin-top: 50px;
+                display: grid;
+                grid-template-columns: auto auto auto auto auto;
+                background-color: transparent;
+                padding: 5px;
+            }
+
+            .grid-item {
+                background-color: rgba(255, 255, 255, 0.8);
+                border: 1px solid rgba(0, 0, 0, 0.8);
+                margin: 15px 10px;
+                padding: 30px 0px;
+                font-size: 10px;
+                text-align: center;
+
+                p {
+                    
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    .nav-btn {
+        border-radius: 30px;
+        padding: 10px 15px;
+        margin-right: 5px; 
+        background: transparent;
+        background-repeat: no-repeat;
+        border: 3px solid rgb(253, 192, 80);
+        cursor: pointer;
+        overflow: hidden;
+        transition-duration: 0.4s;
+        color: rgb(253, 192, 80);;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+        float: right;
+    }
+}
