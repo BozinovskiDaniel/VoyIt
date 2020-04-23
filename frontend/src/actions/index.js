@@ -101,3 +101,59 @@ export const getLocation = (location) => {
         payload: location
     };
 };
+
+export const addHotelStartDate = data => {
+    return {
+        type: 'ADD_HOTELS_START_DATE',
+        payload: data
+    };
+};
+
+export const removeHotelStartDate = data => {
+    return {
+        type: 'REMOVE_HOTELS_START_DATE',
+        payload: data
+    };
+};
+
+export const addAttractionStartDate = data => {
+    return {
+        type: 'ADD_ATTRACTIONS_START_DATE',
+        payload: data
+    };
+};
+
+export const removeAttractionStartDate = data => {
+    return {
+        type: 'REMOVE_ATTRACTIONS_START_DATE',
+        payload: data
+    };
+};
+
+export const addRestaurantStartDate = data => {
+    return {
+        type: 'ADD_RESTAURANTS_START_DATE',
+        payload: data
+    };
+};
+
+export const removeRestaurantStartDate = data => {
+    return {
+        type: 'REMOVE_RESTAURANTS_START_DATE',
+        payload: data
+    };
+};
+
+export const addExtraEventStartDate = data => {
+    return {
+        type: 'ADD_EXTRAEVENT_START_DATE',
+        payload: data
+    };
+};
+
+export const removeExtraEventStartDate = data => {
+    return {
+        type: 'REMOVE_EXTRAEVENT_START_DATE',
+        payload: data
+    };
+};

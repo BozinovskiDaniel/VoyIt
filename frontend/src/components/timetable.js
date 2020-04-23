@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { getExtraEvents } from '../actions';
+import { getExtraEvents, addHotelStartDate, removeHotelStartDate, addAttractionStartDate,
+         removeAttractionStartDate, addRestaurantStartDate, removeRestaurantStartDate,
+         addExtraEventStartDate, removeExtraEventStartDate } from '../actions';
 import { Col, Row } from "reactstrap";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -23,7 +25,7 @@ class Timetable extends Component {
     super(props);
     this.state = {
         events: [],
-        calendarEvents: [{title: "Event 1", start: '2020-04-24'}],
+        calendarEvents: [],
         url: 'www.google.com',
         showSelected: false
     };
@@ -45,7 +47,7 @@ class Timetable extends Component {
                 'photo': hotel['hotel']['photo']['images']['large']['url'],
                 'price': hotel['hotel']['price'],
                 'address': hotel['hotel']['location_string'],
-                'start': this.props.startDate
+                'start': hotel['hotel']['start']
                 })
         })
 
@@ -58,7 +60,8 @@ class Timetable extends Component {
                 'thumbnail': attraction['attraction']['photo']['images']['thumbnail']['url'],
                 'photo': attraction['attraction']['photo']['images']['large']['url'],
                 'price': attraction['attraction']['price'],
-                'address': attraction['attraction']['location_string']
+                'address': attraction['attraction']['location_string'],
+                'start': attraction['attraction']['start']
                 })
         })
 
@@ -71,7 +74,8 @@ class Timetable extends Component {
                 'thumbnail': res['res']['photo']['images']['thumbnail']['url'],
                 'photo': res['res']['photo']['images']['large']['url'],
                 'price': res['res']['price'],
-                'address': res['res']['location_string']
+                'address': res['res']['location_string'],
+                'start': res['res']['start']
                 })
         })
 
@@ -175,6 +179,13 @@ class Timetable extends Component {
       cancelButtonText: "Close"
     }).then(result => {
       if (result.value) {
+
+        // Remove the start here
+        this.props.removeHotelStartDate(eventClick.event._def.title);
+        this.props.removeAttractionStartDate(eventClick.event._def.title);
+        this.props.removeRestaurantStartDate(eventClick.event._def.title);
+        this.props.removeExtraEventStartDate(eventClick.event._def.title);
+
         eventClick.event.remove(); // It will remove event from the calendar
         Alert.fire("Deleted!", "Your Event has been deleted.", "success");
       }
@@ -199,7 +210,8 @@ class Timetable extends Component {
             'thumbnail': 'https://worldfoodtravel.org/wp-content/uploads/2019/06/no-image.jpg',
             'photo': 'N/A',
             'price': 'N/A',
-            'address': 'N/A'
+            'address': 'N/A',
+            'start': new Date()
           };
           
           this.props.getExtraEvents(newEvent);
@@ -221,8 +233,50 @@ class Timetable extends Component {
     });
   }
 
-  handleDrop = (arg) => { // bind with an arrow function
-    alert(arg.dateStr)
+  handleDropInitial = (e) => {
+    console.log(e);
+
+    if ((e.draggedEl.title).match(/^\d/)) {
+      // Return true
+      if (((e.draggedEl.title.split(" ")).slice(-1)[0]) == "(Hotel)") this.props.addHotelStartDate({'name': (e.draggedEl.title.substr(e.draggedEl.title.indexOf(' ')+1)), 'start': e.dateStr});
+      else if (((e.draggedEl.title.split(" ")).slice(-1)[0]) == "(Attraction)") this.props.addAttractionStartDate({'name': (e.draggedEl.title.substr(e.draggedEl.title.indexOf(' ')+1)), 'start': e.dateStr});
+      else if (((e.draggedEl.title.split(" ")).slice(-1)[0]) == "(Restaurant)") this.props.addRestaurantStartDate({'name': (e.draggedEl.title.substr(e.draggedEl.title.indexOf(' ')+1)), 'start': e.dateStr});
+      else this.props.addExtraEventStartDate({'name': (e.draggedEl.title.substr(e.draggedEl.title.indexOf(' ')+1)), 'start': e.dateStr})
+    
+    } else {
+      if (((e.draggedEl.title.split(" ")).slice(-1)[0]) == "(Hotel)") this.props.addHotelStartDate({'name': e.draggedEl.title, 'start': e.dateStr});
+      else if (((e.draggedEl.title.split(" ")).slice(-1)[0]) == "(Attraction)") this.props.addAttractionStartDate({'name': e.draggedEl.title, 'start': e.dateStr});
+      else if (((e.draggedEl.title.split(" ")).slice(-1)[0]) == "(Restaurant)") this.props.addRestaurantStartDate({'name': e.draggedEl.title, 'start': e.dateStr});
+      else this.props.addExtraEventStartDate({'name': e.draggedEl.title, 'start': e.dateStr})
+    }
+
+  }
+
+  handleDrop = (e) => { // bind with an arrow function
+    console.log(e)
+    let d = new Date(e.event.start)
+    let addDayNow = new Date(d.setDate(d.getDate() + 1));
+    console.log(addDayNow);
+    // Set that events start date in the redux state to e.event.start
+    let timeStr = ((addDayNow).toISOString()).slice(0, 10);
+
+    if ((e.el.text).match(/^\d/)) {
+      // Return true
+      if (((e.el.text.split(" ")).slice(-1)[0]) == "(Hotel)") this.props.addHotelStartDate({'name': (e.el.text.substr(e.el.text.indexOf(' ')+1)), 'start': timeStr});
+      else if (((e.el.text.split(" ")).slice(-1)[0]) == "(Attraction)") this.props.addAttractionStartDate({'name': (e.el.text.substr(e.el.text.indexOf(' ')+1)), 'start': timeStr});
+      else if (((e.el.text.split(" ")).slice(-1)[0]) == "(Restaurant)") this.props.addRestaurantStartDate({'name': (e.el.text.substr(e.el.text.indexOf(' ')+1)), 'start': timeStr});
+      else this.props.addExtraEventStartDate({'name': (e.el.text.substr(e.el.text.indexOf(' ')+1)), 'start': timeStr})
+    
+    } else {
+      if (((e.el.text.split(" ")).slice(-1)[0]) == "(Hotel)") this.props.addHotelStartDate({'name': e.el.text, 'start': timeStr});
+      else if (((e.el.text.split(" ")).slice(-1)[0]) == "(Attraction)") this.props.addAttractionStartDate({'name': e.el.text, 'start': timeStr});
+      else if (((e.el.text.split(" ")).slice(-1)[0]) == "(Restaurant)") this.props.addRestaurantStartDate({'name': e.el.text, 'start': timeStr});
+      else this.props.addExtraEventStartDate({'name': e.el.text, 'start': timeStr})
+    }
+  }
+
+  hello = (e) => {
+    console.log('hey');
   }
 
   render() {
@@ -237,7 +291,6 @@ class Timetable extends Component {
                   start: this.props.startDate,
                   end: this.props.endDate
                 }}
-                eventDropInfo={this.eventDropInfo}
                 header={{
                   left: "prev,next today",
                   center: "title",
@@ -247,16 +300,16 @@ class Timetable extends Component {
                 events={this.state.calendarEvents}
                 eventDurationEditable={true}
                 editable={true}
-                droppable={true}
+                droppable={true, this.hello}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 ref={this.calendarComponentRef}
                 weekends={this.state.calendarWeekends}
                 events={this.state.calendarEvents}
-                eventDrop={this.handleDrop}
-                // drop={this.drop}
+                eventDrop={this.drop, this.handleDrop}
+                drop={this.drop, this.handleDropInitial}
                 eventReceive={this.eventReceive}
                 eventClick={this.eventClick}
-                // selectable={true}
+                selectable={true}
               />
             </div>
           </Col>
@@ -310,6 +363,30 @@ class Timetable extends Component {
 const mapDispatchToProps = dispatch => ({
   getExtraEvents: event => {
     dispatch(getExtraEvents(event));
+  },
+  addHotelStartDate: data => {
+    dispatch(addHotelStartDate(data));
+  },
+  removeHotelStartDate: data => {
+    dispatch(removeHotelStartDate(data));
+  },
+  addAttractionStartDate: data => {
+    dispatch(addAttractionStartDate(data));
+  },
+  removeAttractionStartDate: data => {
+    dispatch(removeAttractionStartDate(data));
+  },
+  addRestaurantStartDate: data => {
+    dispatch(addRestaurantStartDate(data));
+  },
+  removeRestaurantStartDate: data => {
+    dispatch(removeRestaurantStartDate(data));
+  },
+  addExtraEventStartDate: data => {
+    dispatch(addExtraEventStartDate(data));
+  },
+  removeExtraEventStartDate: data => {
+    dispatch(removeExtraEventStartDate(data));
   }
 })
 
